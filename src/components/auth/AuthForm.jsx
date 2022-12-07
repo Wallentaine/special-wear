@@ -7,6 +7,11 @@ import {MAIN_ROUTE} from "../../utils/routes"
 import SimpleSnackBar from "../UI/snackbar/SimpleSnackBar"
 import {observer} from "mobx-react-lite"
 
+const validEmail = (e) => {
+    const filter = /^\s*[\w\-+_]+(\.[\w\-+_]+)*@[\w\-+_]+\.[\w\-+_]+(\.[\w\-+_]+)*\s*$/;
+    return String(e).search(filter) !== -1;
+}
+
 const AuthForm = observer(() => {
 
     const {user} = useContext(Context)
@@ -37,6 +42,16 @@ const AuthForm = observer(() => {
 
         if (!email || !password) {
             setAuthError("Вы не заполнили необходимые поля")
+            handleSnackClick({
+                vertical: 'bottom',
+                horizontal: 'right',
+                success: false
+            })
+            return
+        }
+
+        if (!validEmail(email)) {
+            setAuthError("Проверьте правильность введённого e-mail адреса")
             handleSnackClick({
                 vertical: 'bottom',
                 horizontal: 'right',

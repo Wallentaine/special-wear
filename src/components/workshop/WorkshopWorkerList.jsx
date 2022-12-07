@@ -7,8 +7,7 @@ import {
     TableContainer,
     TableHead,
     TablePagination,
-    TableRow,
-    Typography
+    TableRow
 } from "@mui/material";
 import {useState} from "react"
 import {WORKER_ROUTE} from "../../utils/routes"
